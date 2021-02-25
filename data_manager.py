@@ -6,6 +6,7 @@ class DataManager:
 
     def __init__(self):
         self.destination_data = {}
+        self.user_emails = {}
 
     def get_destination_data(self):
         # 2. Use the Sheety API to GET all the data in that sheet and print it out.
@@ -31,3 +32,9 @@ class DataManager:
                 json=new_data
             )
             print(response.text)
+
+    def get_user_emails(self):
+        response = requests.get(url=os.environ.get('SHEETY_ENDPOINT_USER'))
+        self.user_emails = response.json()['users']
+        return self.user_emails
+
